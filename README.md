@@ -39,7 +39,7 @@ Com Docker Compose, você sobe **frontend (React + Nginx)**, **backend (FastAPI)
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/PedroGFC/Engenharia-de-Software.git
-cd Engenharia-de-Software
+git clone https://github.com/GuilhermGarcia/TempoBemGasto.git
+cd TempoBemGasto
 ```
 "# TempoBemGasto" 
