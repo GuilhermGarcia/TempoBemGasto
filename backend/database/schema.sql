@@ -79,8 +79,19 @@ CREATE TABLE IF NOT EXISTS inscricoes (
       ON DELETE CASCADE
 );
 
+-- 6) Usuários (login básico)
+CREATE TABLE IF NOT EXISTS usuarios (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  email VARCHAR(120) NOT NULL UNIQUE,
+  senha_hash VARCHAR(255) NOT NULL,
+  role ENUM('volunteer','ngo') NOT NULL,
+  cnpj VARCHAR(18),
+  criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 -- ===================================================================
--- 6) Dados de exemplo para testes iniciais
+-- 7) Dados de exemplo para testes iniciais
 --    (1 ONG, 1 oportunidade, 1 voluntário, 1 inscrição)
 -- ===================================================================
 INSERT INTO ongs (nome, endereco) 
@@ -98,19 +109,5 @@ VALUES (
 
 INSERT INTO inscricoes (voluntario_id, oportunidade_id)
 VALUES (1, 1);
-
-
--- 7) Usuários (login básico)
-CREATE TABLE IF NOT EXISTS usuarios (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  nome VARCHAR(100) NOT NULL,
-  email VARCHAR(120) NOT NULL UNIQUE,
-  senha_hash VARCHAR(255) NOT NULL,
-  role ENUM('volunteer','ngo') NOT NULL,
-  cnpj VARCHAR(18),
-  criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-
 
 -- FIM DO SCHEMA
