@@ -1,15 +1,14 @@
-# Etapa final: só servir o build pronto
 FROM nginx:stable-alpine
 
-# Remove os arquivos padrão do Nginx
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copia o build já existente (feito no seu PC)
+# Copia o build já existente (feito no seu PC ou unzipado no servidor)
 COPY build /usr/share/nginx/html
 
-# Expõe a porta padrão do Nginx
+# 🔧 Garante que nginx consegue ler tudo
+RUN chown -R nginx:nginx /usr/share/nginx/html \
+    && find /usr/share/nginx/html -type d -exec chmod 755 {} \; \
+    && find /usr/share/nginx/html -type f -exec chmod 644 {} \;
+
 EXPOSE 80
-
-# Comando padrão do container
-CMD ["nginx", "-g", "daemon off;"]
-
+CMD ["nginx","-g","daemon off;"]
